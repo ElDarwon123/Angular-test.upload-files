@@ -1,18 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router } from '@angular/router';
 import { Storage, ref, uploadBytes } from '@angular/fire/storage';
 
-
-
 @Component({
-  selector: 'app-root',
+  selector: 'app-secretaria',
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports: [],
+  templateUrl: './secretaria.component.html',
+  styleUrl: './secretaria.component.css'
 })
-export class AppComponent {
-  constructor(private storage: Storage){}
+export class SecretariaComponent {
+  constructor(private storage: Storage, private router: Router  ){}
   uploadManual($event: any){
     const files = $event.target.files;
     console.log(files);
@@ -26,10 +24,16 @@ export class AppComponent {
       uploadBytes(manualRef, file)
         .then(snapshot => {
           console.log('Uploaded a blob or file!', snapshot);
+          window.alert(`${file.name} ha sido subido con edxito`)
         })
         .catch(error => {
           console.error('Error uploading file', error);
         });
     }
+  }
+  sendRoomName(){
+    setTimeout(()=>{
+      this.router.navigate(['/home'])
+    }, 1000);
   }
 }

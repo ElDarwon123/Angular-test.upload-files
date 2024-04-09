@@ -1,0 +1,1 @@
+install firebase => ng add @angular/fire
